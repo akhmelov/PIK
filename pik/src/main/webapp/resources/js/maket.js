@@ -106,11 +106,12 @@ function creatRecord()
         return record.record.find("input#" + idFields[idInput]).val();
     }
 
-    record.totalCheck = function(){
+    record.isOkTotalCheck = function(){
         var isCorrect = true;
         var isChanged = false;
         for(var el in idFields){
             var val = record.record.find("input#" + idFields[el]).val();
+            record.record.find("input#" + idFields[el]).removeClass("hasntClicked");
             if(val.trim() == ''){ //filed is empty, error
                 record.record.find("input#" + idFields[el]).removeClass("has-change");
                 record.record.find("input#" + idFields[el]).addClass("has-error");
@@ -135,6 +136,7 @@ function creatRecord()
             record.linkNavPanel.removeClass("has-change");
             record.linkNavPanel.removeClass("has-error");
         }
+        return isCorrect;
     }
 
     record.check = function(){
@@ -168,12 +170,20 @@ function creatRecord()
             record.linkNavPanel.removeClass("has-error");
         }
     }
-
-    record.record.focusout(function(){
-       record.check();
-    });
+    record.saveOnServer = function(){
+        var isOk = record.isOkTotalCheck();
+        if(!isOk){
+            alert("Masz bledy");
+            return;
+        }
+        alert("saved");
+        //TODO save
+    }
 
     init = function(){
+        record.record.focusout(function(){
+            record.check();
+        });
         for(var el in idFields){
             record.record.find("input#" + idFields[el]).addClass("hasntClicked");
             record.record.find("input#" + idFields[el]).focus(function(){
@@ -185,6 +195,12 @@ function creatRecord()
         });
         record.record.find("input#" + idFields[surnameStudent]).focusout(function(){
             record.setSurname($(this).val());
+        });
+        record.record.find("button#save").click(function(){
+            record.saveOnServer();
+        });
+        record.linkNavPanel.find("span#save").click(function(){
+            record.saveOnServer();
         });
     }
     init();
