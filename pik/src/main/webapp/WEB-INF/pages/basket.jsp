@@ -5,6 +5,8 @@
 	<head>
         <jsp:include page="common/head.jsp"/>
 
+        <link href="<c:url value="/resources/css/maket.css" />" rel="stylesheet">
+        <script src="<c:url value="/resources/js/maket.js" />"></script>
 	  <title>My first styled page</title>
 	</head>
 	<body id="${idBasket}">

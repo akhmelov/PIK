@@ -11,6 +11,9 @@
     <head>
         <jsp:include page="common/head.jsp"/>
         <title>Spring MVC Form Handling</title>
+
+        <link href="<c:url value="/resources/css/baskets.css" />" rel="stylesheet">
+        <script src="<c:url value="/resources/js/baskets.js" />"></script>
     </head>
     <body>
         <div id="workspace">
