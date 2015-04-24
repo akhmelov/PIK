@@ -18,6 +18,7 @@ public class App
     public static final String ADMIN = "admin";
     public static final String NAME_NEW_BASKET_PARAMETER = "nameBasket";
     public static final String ID_EXIST_BASKET_PARAMETER =  "idBasket";
+    public static final String GET_RECORDS_JSON = "getRecordsJson";
 
     public static final String PIK_CONTROLLER_URL = "/pik/";
     public static final String STUDENT_CONTROLLER_URL = "/student/";

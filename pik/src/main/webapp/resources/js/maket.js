@@ -4,23 +4,24 @@ $( document ).ready(function() {
     $.ajax({
         url: "getRecordsJson",
         type: "POST",
+        data: { 'idBasket': '' + $("body").attr("id")},
         //contentType: 'application/json',
         success: function(recordsf){
             for(var el in recordsf) {
                 var rec = creatRecord();
                 var tmp = recordsf[el];
                 rec.setId(tmp.id);
-                rec.setNameStudent(tmp.nameStudent);
-                rec.setSurnameStudent(tmp.surnameStudent);
-                rec.setter(idFields[emailStudent], tmp.mailStudent);
-                rec.setter(idFields[titlePL], tmp.titlePL);
-                rec.setter(idFields[titleEN], tmp.titleEN);
-                rec.setter(idFields[namePromotor], tmp.namePromoter);
-                rec.setter(idFields[surnamePromotor], tmp.surnamePromoter);
-                rec.setter(idFields[abstractPL], tmp.abstractPL);
-                rec.setter(idFields[abstractEN], tmp.abstractEN);
-                rec.setter(idFields[keyWordsPL], tmp.keyWordsPL);
-                rec.setter(idFields[keyWordsEN], tmp.keyWordsEN);
+                rec.setter(nameStudent, tmp.nameStudent);
+                rec.setter(surnameStudent, tmp.surnameStudent);
+                rec.setter(mailStudent, tmp.mailStudent);
+                rec.setter(titlePL, tmp.titlePL);
+                rec.setter(titleEN, tmp.titleEN);
+                rec.setter(namePromoter, tmp.namePromoter);
+                rec.setter(surnamePromoter, tmp.surnamePromoter);
+                rec.setter(abstractPL, tmp.abstractPL);
+                rec.setter(abstractEN, tmp.abstractEN);
+                rec.setter(keyWordsPL, tmp.keyWordsPL);
+                rec.setter(keyWordsEN, tmp.keyWordsEN);
                 records.push(rec);
             }
             refreshAll();
@@ -34,22 +35,22 @@ $( document ).ready(function() {
 var idFields = new Array();
     var nameStudent = "nameStudent";
     var surnameStudent = "surnameStudent";
-    var emailStudent = "mailStudent";
+    var mailStudent = "mailStudent";
     var titlePL = "titlePL";
     var titleEN = "titleEN";
-    var namePromotor = "namePromoter";
-    var surnamePromotor = "surnamePromoter";
+    var namePromoter = "namePromoter";
+    var surnamePromoter = "surnamePromoter";
     var abstractPL = "abstractPL";
     var abstractEN = "abstractEN";
     var keyWordsPL = "keyWordsPL";
     var keyWordsEN = "keyWordsEN";
     idFields[nameStudent] = "nameStudent";
     idFields[surnameStudent] = "surnameStudent";
-    idFields[emailStudent] = "mailStudent";
+    idFields[mailStudent] = "mailStudent";
     idFields[titlePL] = "titleEssayPL";
     idFields[titleEN] = "titleEssayEN";
-    idFields[namePromotor] = "namePromotor";
-    idFields[surnamePromotor] = "surnamePromotor";
+    idFields[namePromoter] = "namePromotor";
+    idFields[surnamePromoter] = "surnamePromotor";
     idFields[abstractPL] = "abstractPL";
     idFields[abstractEN] = "abstractEN";
     idFields[keyWordsPL] = "keyWordsPL";

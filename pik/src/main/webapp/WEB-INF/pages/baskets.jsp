@@ -29,7 +29,9 @@
                 <c:forEach var="listVar" items="${baskets}" varStatus="loop">
                     <tr>
                         <td><c:out value="${listVar.id}"/></td>
-                        <td><c:out value="${listVar.name}"/></td>
+                        <td>
+                            <a href="basket?idBasket=${listVar.id}"><c:out value="${listVar.name}"/></a>
+                        </td>
                         <td><c:out value="${listVar.dateCreate}"/></td>
                         <td><c:out value="${listVar.dateEdit}"/></td>
                         <td><c:out value="${listVar.contain}"/></td>

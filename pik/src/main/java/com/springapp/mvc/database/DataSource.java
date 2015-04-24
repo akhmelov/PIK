@@ -33,7 +33,7 @@ public class DataSource implements DataSourceImp
                     Record tmp = new Record();
                     tmp.setId(k); //started 0
                     tmp.setMA(false);
-                    tmp.setNameStudent("TestName " + k);
+                    tmp.setNameStudent("TestName-" + i + "-" + j + "-" + k);
                     tmp.setMailStudent("test");
                     tmp.setSurnamePromoter("TestName " + k);
                     tmp.setNamePromoter("test");

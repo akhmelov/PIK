@@ -39,21 +39,18 @@ public class TinController
     }
 
     @RequestMapping(value = App.HOME, method = RequestMethod.POST)
-    public ModelAndView homePost(@ModelAttribute("SpringWeb") SingInForm singInForm)
+    public String homePost(@ModelAttribute("SpringWeb") SingInForm singInForm)
     {
         ModelAndView modelAndView = new ModelAndView();
         switch (singInForm.getWho())
         {
             case Promoter:
-                modelAndView = basketsPage();
-                break;
+                return "redirect:" + App.BASKETS;
             case Admin:
-                modelAndView.setViewName(App.ADMIN);
-                break;
+                return "redirect:" + App.ADMIN;
             default:
-                modelAndView = basketsPage();
+                return "redirect:" + App.BASKETS;
         }
-        return modelAndView;
     }
 
     @RequestMapping(value = App.BASKETS, method = RequestMethod.GET)
@@ -66,9 +63,13 @@ public class TinController
     }
 
     @RequestMapping(value = App.BASKET)
-    public ModelAndView homeTin(ModelMap modelMap)
+    public ModelAndView homeTin(HttpServletRequest request)
     {
+        String idBasket = request.getParameter(App.ID_EXIST_BASKET_PARAMETER);
+        int id = Integer.valueOf(idBasket);
+
         ModelAndView modelAndView = new ModelAndView(App.BASKET);
+        modelAndView.addObject("idBasket", id);
         return modelAndView;
     }
 
@@ -99,11 +100,11 @@ public class TinController
         return "redirect:" + App.BASKETS;
     }
 
-    @RequestMapping(value = "/getRecordsJson", method = RequestMethod.POST)
-    public @ResponseBody List<Record> getRecords()
+    @RequestMapping(value = App.GET_RECORDS_JSON, method = RequestMethod.POST)
+    public @ResponseBody List<Record> getRecords(@RequestParam(value = "" + App.ID_EXIST_BASKET_PARAMETER) Integer idBasket)
     {
         //TODO
-        List<Record> tmp = new LinkedList<Record>(database.getRecordsByBasket(1, 1).values());
+        List<Record> tmp = new LinkedList<Record>(database.getRecordsByBasket(1, idBasket).values());
         return tmp;
     }
 

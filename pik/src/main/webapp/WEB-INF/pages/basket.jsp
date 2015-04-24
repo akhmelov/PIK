@@ -7,7 +7,7 @@
 
 	  <title>My first styled page</title>
 	</head>
-	<body>
+	<body id="${idBasket}">
         <jsp:include page="tags/navPanel.jsp" />
         <div type="hidden" style="display: none;"> <!-- work space js -->
             <jsp:include page="tags/record.jsp"/>
