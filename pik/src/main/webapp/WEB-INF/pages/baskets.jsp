@@ -46,19 +46,6 @@
                         </td>
                     </tr>
                 </c:forEach>
-                <tr>
-                    <td>1</td>
-                    <td>Nazwa</td>
-                    <td>2015-04-10 21:48</td>
-                    <td>2015-04-10 21:48</td>
-                    <td>5</td>
-                    <td>
-                        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-                    </td>
-                    <td>
-                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-                    </td>
-                </tr>
             </table>
             <button type="button" id="add" class="btn btn-success">Add</button>
         </div>

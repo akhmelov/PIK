@@ -12,12 +12,15 @@ public class App
     public static final String ADD_BASKET = "addBasket";
     public static final String DELETE_BASKET = "deleteBasket";
     public static final String EDIT_BASKET = "editBasket";
-    public static final String ADD_ESSAY = "addEssay";
-    public static final String DELETE_ESSAY = "deleteEssay";
-    public static final String EDIT_ESSAY = "editEssay";
+    public static final String ADD_RECORD = "addRecord";
+    public static final String DELETE_RECORD = "deleteRecord";
+    public static final String SAVE_RECORD = "saveRecord";
+    public static final String GET_RECORD = "getRecord";
+    public static final String SAVE_RECORDS = "saveRecords";
     public static final String ADMIN = "admin";
     public static final String NAME_NEW_BASKET_PARAMETER = "nameBasket";
     public static final String ID_EXIST_BASKET_PARAMETER =  "idBasket";
+    public static final String ID_EXIST_RECORD_PARAMETER = "idRecord";
     public static final String GET_RECORDS_JSON = "getRecordsJson";
 
     public static final String PIK_CONTROLLER_URL = "/pik/";

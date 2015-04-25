@@ -27,6 +27,8 @@ $( document ).ready(function() {
 });
 
 function deleteBasket(id){
+    if(!confirm("Czy jestes pewen, ze chcesz usunac ten koszyk?"))
+        return
     var form = document.createElement("form");
     form.setAttribute("method", "POST");
     form.setAttribute("action", "deleteBasket");

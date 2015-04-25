@@ -56,7 +56,7 @@ public class DataSource implements DataSourceImp
     public LinkedList<Basket> getBaskets(int idPromoter)
     {
         LinkedList<Basket> baskets = new LinkedList<Basket>();
-        int n = database.get(idPromoter).size();
+        int n = 0;
         for(Map<Integer, Record> tmp: database.get(idPromoter))
         {
             Basket basket = new Basket();
@@ -65,7 +65,7 @@ public class DataSource implements DataSourceImp
             basket.setName("Name-" + n);
             basket.setDateCreate(new Date());
             basket.setDateEdit(new Date());
-            n--;
+            n++;
             baskets.push(basket);
         }
         return baskets;
@@ -104,7 +104,12 @@ public class DataSource implements DataSourceImp
 
     public Integer addNewRecord(int idPromoter, int idBasket, Record record)
     {
+        //TODO
         int key = database.get(idPromoter).get(idBasket).size();
+        Random rand = new Random();
+        int randomNum = rand.nextInt((100000 - 10) + 1) + 10;
+        key += (key % 3 + 1)* randomNum;
+        record.setId(key);
         database.get(idPromoter).get(idBasket).put(key, record);
         return key;
     }

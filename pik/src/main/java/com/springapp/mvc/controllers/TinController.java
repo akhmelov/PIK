@@ -40,7 +40,7 @@ public class TinController
 
     @RequestMapping(value = App.HOME, method = RequestMethod.POST)
     public String homePost(@ModelAttribute("SpringWeb") SingInForm singInForm)
-    {
+    {   //TODO
         ModelAndView modelAndView = new ModelAndView();
         switch (singInForm.getWho())
         {
@@ -103,12 +103,11 @@ public class TinController
     @RequestMapping(value = App.GET_RECORDS_JSON, method = RequestMethod.POST)
     public @ResponseBody List<Record> getRecords(@RequestParam(value = "" + App.ID_EXIST_BASKET_PARAMETER) Integer idBasket)
     {
-        //TODO
         List<Record> tmp = new LinkedList<Record>(database.getRecordsByBasket(1, idBasket).values());
         return tmp;
     }
 
-    @RequestMapping(value = "/saveRecords", method = RequestMethod.POST)
+    @RequestMapping(value = App.SAVE_RECORDS, method = RequestMethod.POST)
     public ModelAndView saveRecords(@RequestBody LinkedList<Record> records)
     {
         //TODO
@@ -119,31 +118,41 @@ public class TinController
         return modelAndView;
     }
 
-    @RequestMapping(value = "/deleteRecord", method = RequestMethod.GET)
-    public @ResponseBody Boolean deleteRecord(@RequestParam(value = "idRecord") Integer idRecord)
+    @RequestMapping(value = App.ADD_RECORD, method = RequestMethod.POST)
+    public @ResponseBody Integer deleteRecord(@RequestParam(value = "" + App.ID_EXIST_BASKET_PARAMETER) Integer idBasket)
     {
-        //TODO
-        if(database.deleteRecord(1, 1, idRecord))
-            return new Boolean(false);
-        return new Boolean(true);
+        Record record = new Record();
+        return database.addNewRecord(1, idBasket, record);
     }
 
-    @RequestMapping(value = "/saveRecord", method = RequestMethod.POST)
-    public @ResponseBody Boolean saveRecord(@RequestBody Record record)
+    @RequestMapping(value = App.GET_RECORD, method = RequestMethod.POST)
+    public @ResponseBody Record getRecords(@RequestParam(value = "" + App.ID_EXIST_BASKET_PARAMETER) Integer idBasket,
+                                                 @RequestParam(value = "" + App.ID_EXIST_RECORD_PARAMETER) Integer idRecord)
+    {
+        Record record = database.getRecord(1, idBasket, idRecord);
+        record.setNameStudent("" + idRecord); //TODO delete this line, set database
+        record.setSurnameStudent("" + idBasket); //TODO delete this line, set database
+        return record;
+    }
+
+    @RequestMapping(value = App.DELETE_RECORD, method = RequestMethod.POST)
+    public @ResponseBody Boolean deleteRecord(HttpServletRequest request)
+    {
+        int idBasket = Integer.valueOf(request.getParameter(App.ID_EXIST_BASKET_PARAMETER));
+        int idRecord = Integer.valueOf(request.getParameter(App.ID_EXIST_RECORD_PARAMETER));
+        if(database.deleteRecord(1, idBasket, idRecord))
+            return new Boolean(true);
+        return new Boolean(false);
+    }
+
+    @RequestMapping(value = App.SAVE_RECORD, method = RequestMethod.POST)
+    public @ResponseBody Boolean saveRecord(@RequestParam(value = "" + App.ID_EXIST_BASKET_PARAMETER) Integer idBasket,
+                                                @RequestBody Record record)
     {
         //TODO
         if(database.saveRecord(1, 1, record.getId(), record))
-            return new Boolean(false);
-        return new Boolean(true);
-    }
-
-    @RequestMapping(value = "/hasChangeRecord", method = RequestMethod.POST)
-    public @ResponseBody Boolean hasChangeRecord(@RequestBody Record record)
-    {
-        //TODO
-        if(database.getRecord(1, 1, record.getId()).equals(record))
-            return new Boolean(false);
-        return new Boolean(true);
+            return new Boolean(true);
+        return new Boolean(false);
     }
 
     @RequestMapping(value = "/generateXML", method = RequestMethod.POST, consumes = "application/json")
