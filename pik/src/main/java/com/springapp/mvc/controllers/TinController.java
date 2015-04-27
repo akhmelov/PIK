@@ -146,10 +146,10 @@ public class TinController
     }
 
     @RequestMapping(value = App.SAVE_RECORD, method = RequestMethod.POST)
-    public @ResponseBody Boolean saveRecord(@RequestParam("idBasket") Integer idBasket, @ModelAttribute("record") Record record)
+    public @ResponseBody Boolean saveRecord(@RequestParam("idBasket") Integer idBasket,@RequestBody Record record)
     {
         //TODO
-        if(database.saveRecord(1, 1, record.getId(), record))
+        if(database.saveRecord(1, idBasket, record.getId(), record))
             return new Boolean(true);
         return new Boolean(false);
     }

@@ -203,13 +203,12 @@ function creatRecord(id)
         //rec.setter(abstractEN, tmp.abstractEN); /TODO
         rec["" + keyWordsPL] = record.getter(keyWordsPL);
         rec["" + keyWordsEN] = record.getter(keyWordsEN);
-        var tmp = JSON.stringify( { "idBasket": $("body").attr("id"), "record": rec} );
         $.ajax({
-            url: "saveRecord",
+            url: "saveRecord?idBasket=" + $("body").attr("id"),
             type: "POST",
             contentType : 'application/json; charset=utf-8',
             async: false,
-            data: JSON.stringify( { "idBasket": $("body").attr("id"), "record": rec} ),
+            data: JSON.stringify(rec),
             //contentType: 'application/json',
             success: function(data){
                 if(data + "" !== "true")
@@ -362,5 +361,6 @@ function refreshAll()
         var obj = records[el];
         navlink.append(obj.linkNavPanel);
         divForms.append(obj.record);
+        obj.isOkTotalCheck();
     }
 }
