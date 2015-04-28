@@ -14,7 +14,8 @@
         <div type="hidden" style="display: none;"> <!-- work space js -->
             <jsp:include page="tags/record.jsp"/>
         </div>
-		<div id="studentsForm">
+        <div id="studentsForm">
         </div>
+        <button type="button" id="addNewRecord" class="btn btn-success" onclick="addNewRecord();">Add</button>
 	</body>
 </html>

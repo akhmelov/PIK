@@ -231,7 +231,6 @@ function creatRecord(id)
                 record.setOriginValue(keyWordsEN, record.getter(keyWordsEN));
 
                 record.check();
-                alert("Saved");
             },
             error: function(request, status, error){
                 $("body").html(request.responseText);
@@ -240,7 +239,7 @@ function creatRecord(id)
     }
     record.delete = function(){
         if(!confirm("Czy jestes pewen, ze chcesz usunac ten record: " + record.getName() + " " + record.getSurname() + "?"))
-            return
+            return;
         var form = document.createElement("form");
         form.setAttribute("method", "POST");
 
@@ -363,4 +362,26 @@ function refreshAll()
         divForms.append(obj.record);
         obj.isOkTotalCheck();
     }
+}
+
+function saveAllRecords(){
+    for(var el in records){
+        records[el].saveOnServer();
+    }
+}
+
+function generateXML(){
+    if(!confirm("Wszystkie zmiany zostana zapisane automatycznie, czy chcesz kontynuowac?"))
+        return;
+    saveAllRecords();
+    for(var el in records){
+        if(!records[el].isOkTotalCheck()){
+            alert("Masz bledy w formularzu, plik nie zostal wygenerowany, prosze poprawic bledy");
+            return;
+        }
+    }
+    var link = document.createElement("a");
+    link.download = "data:text/html,HelloWorld!";
+    link.href = "helloWorld.txt";
+    link.click();
 }
