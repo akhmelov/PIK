@@ -5,7 +5,7 @@ package com.springapp.mvc.forms;
  */
 public class SingInForm
 {
-    public enum Who {Promoter, Admin};
+    public enum Who {Promoter, Admin, Student};
     private String username;
     private String password;
     private boolean staySigned = false;

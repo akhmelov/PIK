@@ -2,6 +2,7 @@ package com.springapp.mvc.controllers;
 
 import com.springapp.mvc.App;
 import com.springapp.mvc.forms.SingInForm;
+import com.springapp.mvc.grains.UserSession;
 import com.springapp.mvc.model.Model;
 import com.springapp.mvc.database.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +22,10 @@ public class PikController
     private Model model;
     @Autowired
     private DataSource database;
+    @Autowired
+    private UserSession userSession;
 
-    @RequestMapping(value = App.PIK_START_PAGE, method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     public ModelAndView home(ModelMap modelMap)
     {
         ModelAndView modelAndView = new ModelAndView(App.PIK_START_PAGE);
@@ -30,21 +33,28 @@ public class PikController
         return modelAndView;
     }
 
-    @RequestMapping(value = App.PIK_START_PAGE, method = RequestMethod.POST)
-    public ModelAndView homePost(@ModelAttribute("SpringWeb") SingInForm singInForm)
+    @RequestMapping(method = RequestMethod.POST)
+    public String homePost(@ModelAttribute("SpringWeb") SingInForm singInForm)
     {
-        ModelAndView modelAndView = new ModelAndView();
+        String url = "redirect:";
         switch (singInForm.getWho())
         {
             case Promoter:
-                modelAndView.setViewName(App.PROMOTER);
+                userSession.setRoleTmp("Promoter");
+                url += "" + App.PROMOTER_CONTROLLER_URL;
                 break;
             case Admin:
-                modelAndView.setViewName(App.ADMIN);
+                userSession.setRoleTmp("Admin");
+                url += "" + App.ADMIN_CONSTROLLER_URL;
+                break;
+            case Student:
+                userSession.setRoleTmp("Student");
+                url += "" + App.STUDENT_CONTROLLER_URL;
                 break;
             default:
-                modelAndView.setViewName(App.PIK_START_PAGE);
+                userSession.setRoleTmp("Anonymous");
+                url += "" + App.PIK_CONTROLLER_URL;
         }
-        return modelAndView;
+        return url;
     }
 }

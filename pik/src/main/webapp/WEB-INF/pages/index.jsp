@@ -6,7 +6,7 @@
     <h2>
         Prosze sie zalogowac
     </h2>
-    <form:form method="post" action="index" modelAttribute="singInForm" commandName="singInForm" enctype="multipart/form-data">
+    <form:form method="post" action="" modelAttribute="singInForm" commandName="singInForm" enctype="multipart/form-data">
         <table>
             <tr>
                 <td><label><form:label path="username">Username</form:label><label></td>
